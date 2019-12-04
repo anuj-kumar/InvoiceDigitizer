@@ -14,8 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+from digifier import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('digifier/', views.DigitizationView.as_view(), name='digitization'),
+    path('digifier/status/<int:doc_id>', views.DigitizationStatusView.as_view(), name='digitization-status')
 ]
