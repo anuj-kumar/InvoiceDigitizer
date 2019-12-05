@@ -5,6 +5,7 @@ from rest_framework import status
 
 from digifier.helpers import DigitizationHelper, DigitizationCacheLayer
 from .serializers import DocumentSerializer
+from .constants import DIGITIZED_STATUS
 
 
 class DigitizationView(APIView):
@@ -17,7 +18,7 @@ class DigitizationView(APIView):
         if doc_serializer.is_valid():
             instance = doc_serializer.save()
         else:
-            # log this incident
+            # also, log this incident
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         DigitizationHelper.initiate_digitization(instance)
@@ -35,5 +36,15 @@ class DigitizationStatusView(APIView):
             'digitization_status': status
         })
 
-    def put(self, request, document_id):
-        pass
+    def put(self, request, doc_id):
+        existing_cache = DigitizationCacheLayer.get(doc_id)
+        if not existing_cache:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        if existing_cache == DIGITIZED_STATUS:
+            return Response({
+                'message': 'Document already digitized'
+            }, status=status.HTTP_208_ALREADY_REPORTED)
+
+        DigitizationCacheLayer.set(doc_id, DIGITIZED_STATUS)
+        return Response(status=status.HTTP_200_OK)
