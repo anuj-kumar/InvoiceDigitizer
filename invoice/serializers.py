@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from .models import Document
+from .models import Invoice
 
 
-class DocumentSerializer(serializers.ModelSerializer):
+class InvoiceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Document
-        fields = ['file']
+        model = Invoice
+        fields = ['number', 'vendor', 'buyer', 'generated_at', 'currency', 'amount', 'items']
