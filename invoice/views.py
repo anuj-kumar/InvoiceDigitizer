@@ -23,7 +23,6 @@ class DigitalInvoiceView(APIView):
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
     def get(self, request, invoice_id):
         try:
             invoice = Invoice.objects.get(pk=invoice_id)
