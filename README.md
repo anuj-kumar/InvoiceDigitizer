@@ -1,7 +1,7 @@
 # InvoiceDigitizer
 
 ## Architecture
-![](https://raw.githubusercontent.com/anuj-kumar/InvoiceDigitizer/master/InvoiceDigitizerArchitecture.png?token=AAZTS5WE4GKEESHAO3XGPJC55FPGS)
+![](https://github.com/anuj-kumar/InvoiceDigitizer/blob/master/InvoiceDigitizerArchitecture.png)
 
 ## Context
 
@@ -17,7 +17,10 @@ This app takes care of the digitization.
 This app takes care of everything post automatic digitization. Digitized invoices are maintained in a structured format here.
 The put API can make updates to existing docs.
 
-## Not implemented
+## Yet To Do / Not Implemented yet
+1. Test Code.
 1. External raw invoice store such as S3.
-2. Logic for digitization.
-3. API Auth.
+1. Logic for digitization.
+1. API Auth.
+1. Cache expiry time setup.
+1. Dedicated queue for invoice digitization setup. Currently default queue is being used.
